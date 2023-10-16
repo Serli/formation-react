@@ -1,0 +1,27 @@
+.filter-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    //background-color: dimgrey;
+    margin: 0.5rem;
+}
+
+.left-side-filter {
+    grid-column: 1/4;
+    grid-row: 1;
+}
+
+.right-side-filter {
+    grid-column: 5/8;
+    grid-row: 1;
+}
+
+fieldset {
+    border:none;
+    display: flex;
+}
+
+.check-element, .filter-date {
+    margin: 0.25rem;
+}
