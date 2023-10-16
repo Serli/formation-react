@@ -3,14 +3,13 @@ TodoForm {
 }
 
 .formElement {
-    margin-bottom: 2rem;
     width: 80%;
-    margin-left: 10%;
 }
 
 .center {
     text-align: center;
 }
+
 .buttonValidate {
     align-items: center;
     appearance: none;
