@@ -43,19 +43,15 @@ export class TodoApp extends Component {
     }
 
     handleFilterChange = (filter) => {
-        this.setState({filteredTodoList: []}, () => {
-            todoDB.forEach( (todo) => {
-                if (this.formatDate(filter.filterFromDate) <= todo.createdAt
-                    && todo.createdAt  <= this.formatDate(filter.filterToDate)) {
-                    if ((filter.filterTodo && todo.status === Status.todo)
-                        || (filter.filterInProgress && todo.status === Status.inProgress)
-                        || (filter.filterDone && todo.status === Status.done)) {
-                        this.state.filteredTodoList.push(todo);
-                    }
-                }
-            });
-            this.setState({todoList: this.state.filteredTodoList});
+        const todoList = todoDB.filter((todo) => {
+            const betweenDate = this.formatDate(filter.filterFromDate) <= todo.createdAt
+                && todo.createdAt  <= this.formatDate(filter.filterToDate);
+            const statusOk = (filter.filterTodo && todo.status === Status.todo)
+                || (filter.filterInProgress && todo.status === Status.inProgress)
+                || (filter.filterDone && todo.status === Status.done);
+            return betweenDate && statusOk;
         });
+        this.setState({todoList});
     }
 
     render() {
@@ -68,7 +64,7 @@ export class TodoApp extends Component {
                     <TodoFilters onFilterChange={this.handleFilterChange} />
                 </div>
                 <div className="todoStats">
-                    <TodoStats todoList={this.state.todoList}/>
+                    <TodoStats todoList={todoDB}/>
                 </div>
                 <div className="todoList">
                     <TodoList todoList={this.state.todoList}/>

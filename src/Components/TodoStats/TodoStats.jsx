@@ -1,5 +1,4 @@
 import {Status} from "../../Model/StatusEnum.js";
-// ./components/PieChart.js
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 // eslint-disable-next-line no-unused-vars
@@ -15,7 +14,7 @@ export const TodoStats = (props) => {
         let nbDone = 0;
 
         // eslint-disable-next-line react/prop-types
-        props.todoList.forEach( (todo) => {
+       /* props.todoList.forEach( (todo) => {
             switch (todo.status) {
                 case Status.todo:
                     nbTodo++;
@@ -29,10 +28,26 @@ export const TodoStats = (props) => {
             }
         });
 
-        return [nbTodo,nbInProgress,nbDone];
-    }
+        return [nbTodo,nbInProgress,nbDone];*/
 
-    const statsData = giveMeStats(props);
+        // eslint-disable-next-line react/prop-types
+        return props.todoList.reduce((res, todo) => {
+            switch (todo.status) {
+                case Status.todo:
+                    res[0]++;
+                    break;
+                case Status.inProgress:
+                    res[1]++;
+                    break;
+                case Status.done:
+                    res[2]++;
+                    break;
+            }
+            return res;
+        },[0,0,0]);
+
+
+    }
 
     const data = {
         labels: labels,
@@ -40,23 +55,17 @@ export const TodoStats = (props) => {
             {
                 label: "Stats Todo",
                 backgroundColor: [
-                    "#007D9C",
-                    "#244D70",
-                    "#D123B3",
-                    "#F7E018",
-                    "#fff",
-                    "#FE452A",
+                    "#f72585",
+                    "#480ca8",
+                    "#4895ef",
                 ],
                 borderColor: [
-                    "rgba(255,99,132,1)",
                     "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)",
-                    "rgba(255, 159, 64, 1)",
+                    "rgba(255,99,132,1)",
+                    "rgb(104,213,118)",
                 ],
                 borderWidth: 1,
-                data: statsData,
+                data: giveMeStats(props),
             },
         ],
     };

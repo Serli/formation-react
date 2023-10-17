@@ -7,7 +7,7 @@
 
 .todoForm {
     grid-column: 1 / 2;
-    grid-row: 1 / 4;
+    grid-row: 1 / 6;
     //background-color: red;
 }
 .todoFilters {
@@ -19,7 +19,7 @@
 
 .todoStats {
     grid-column: 1 / 2;
-    grid-row: 4 / 9;
+    grid-row: 5 / 9;
     border-top: 1px solid #D6D6E7;
     //background-color: purple;
 }

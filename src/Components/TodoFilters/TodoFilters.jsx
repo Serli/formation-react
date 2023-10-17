@@ -41,15 +41,15 @@ export const TodoFilters = (props) => {
                     <h3>Par état</h3>
                     <fieldset>
                         <div className="check-element">
-                            <input type="checkbox" id="todoStatus" name="todoStatus" onChange={onChangeFilterTodo} value={filterTodo} defaultChecked="true"/>
+                            <input type="checkbox" id="todoStatus" name="todoStatus" onChange={onChangeFilterTodo} checked={filterTodo}/>
                             <label htmlFor="todoStatus">{Status.todo}</label>
                         </div>
                         <div className="check-element">
-                            <input type="checkbox" id="inProgressStatus" name="inProgressStatus" onChange={onChangeFilterInProgress} value={filterInProgress} defaultChecked="true"/>
+                            <input type="checkbox" id="inProgressStatus" name="inProgressStatus" onChange={onChangeFilterInProgress} checked={filterInProgress} />
                             <label htmlFor="inProgressStatus">{Status.inProgress}</label>
                         </div>
                         <div className="check-element">
-                            <input type="checkbox" id="doneStatus" name="doneStatus" onChange={onChangeFilterDone} value={filterDone} defaultChecked="true"/>
+                            <input type="checkbox" id="doneStatus" name="doneStatus" onChange={onChangeFilterDone} checked={filterDone} />
                             <label htmlFor="doneStatus">{Status.done}</label>
                         </div>
                     </fieldset>
