@@ -68,7 +68,7 @@ export class TodoApp extends Component {
                     <TodoFilters onFilterChange={this.handleFilterChange} />
                 </div>
                 <div className="todoStats">
-                    <TodoStats />
+                    <TodoStats todoList={this.state.todoList}/>
                 </div>
                 <div className="todoList">
                     <TodoList todoList={this.state.todoList}/>
