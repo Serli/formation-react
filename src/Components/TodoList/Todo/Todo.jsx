@@ -22,7 +22,7 @@ export const Todo = (props) => {
             </div>
             <div className="rightSide">
                 <p className="date">{props.todo.createdAt}</p>
-                <p className="status" onClick={handleStatusClick}>{props.todo.status}</p>
+                <p className={props.todo.status === Status.todo ? "status-todo"  : props.todo.status === Status.inProgress ? "status-inProgress" : "status-done"} onClick={handleStatusClick}>{props.todo.status}</p>
             </div>
         </div>
     );

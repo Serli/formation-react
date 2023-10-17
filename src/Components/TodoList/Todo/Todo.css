@@ -32,9 +32,24 @@
     .date {
         margin-right: 2rem;
     }
-    .status {
+    .status-todo {
         margin-right: 2rem;
         cursor: pointer;
+        border-right: 5px solid deepskyblue;
+        text-align: center;
+    }
+
+    .status-inProgress {
+        margin-right: 2rem;
+        cursor: pointer;
+        border-right: 5px solid firebrick;
+        text-align: center;
+    }
+
+    .status-done {
+        margin-right: 2rem;
+        border-right: 5px solid teal;
+        text-align: center;
     }
 
 }
