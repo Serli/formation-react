@@ -9,27 +9,6 @@ export const TodoStats = (props) => {
     const labels = [Status.todo, Status.inProgress, Status.done]
 
     function giveMeStats(props) {
-        let nbTodo = 0;
-        let nbInProgress = 0;
-        let nbDone = 0;
-
-        // eslint-disable-next-line react/prop-types
-       /* props.todoList.forEach( (todo) => {
-            switch (todo.status) {
-                case Status.todo:
-                    nbTodo++;
-                    break;
-                case Status.inProgress:
-                    nbInProgress++;
-                    break;
-                case Status.done:
-                    nbDone++;
-                    break;
-            }
-        });
-
-        return [nbTodo,nbInProgress,nbDone];*/
-
         // eslint-disable-next-line react/prop-types
         return props.todoList.reduce((res, todo) => {
             switch (todo.status) {
@@ -65,7 +44,8 @@ export const TodoStats = (props) => {
                     "rgb(104,213,118)",
                 ],
                 borderWidth: 1,
-                data: giveMeStats(props),
+                // eslint-disable-next-line react/prop-types
+                data: props.todoList ? giveMeStats(props) : undefined,
             },
         ],
     };

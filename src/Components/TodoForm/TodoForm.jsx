@@ -1,7 +1,20 @@
 import "./TodoForm.css";
 import {useState} from "react";
 import {Status} from "../../Model/StatusEnum.js";
+import {todoDB} from "../../Model/TodoDB.js";
 
+const getMyTodoAnId = () => {
+    let newId = 1;
+    if (todoDB.length > 1) {
+        todoDB.sort(function (a, b) {
+            return a.id - b.id;
+        });
+        newId = todoDB[length-1];
+    } else if (todoDB.length === 1){
+        newId = todoDB[0].id+1;
+    }
+    return newId;
+}
 export const TodoForm = (props) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -17,11 +30,15 @@ export const TodoForm = (props) => {
             createdAt: new Date().toLocaleDateString('en-GB')
         }
         // eslint-disable-next-line react/prop-types
-        props.onTodoSubmit(todo);
+        handleTodoSubmit(todo);
         setTitle('');
         setDescription('');
     };
-
+    const handleTodoSubmit = (todo) => {
+        todo.id = getMyTodoAnId();
+        todoDB.push(todo);
+        //this.setState({todoList : todoDB})
+    }
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     }

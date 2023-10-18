@@ -1,0 +1,49 @@
+.menu-todo {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #36395A;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.title-menu {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.link-menu {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+}
+
+.link-menu:hover:not(.active) {
+    background-color: #2a9d8f;
+    cursor: pointer;
+}
+
+.active {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: #264653;
+}

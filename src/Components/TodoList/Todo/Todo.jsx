@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import "./Todo.css";
 import {Status} from "../../../Model/StatusEnum.js";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {TodoListContext} from "../../TodoHome/TodoHome.jsx";
 
 export const Todo = (props) => {
+    const {setTodoList} = useContext(TodoListContext);
 
     // eslint-disable-next-line no-unused-vars
     const [ status,setStatus] = useState('');
@@ -12,6 +14,7 @@ export const Todo = (props) => {
         const status = props.todo.status === Status.todo ? Status.inProgress : Status.done
         props.todo.status = status;
         setStatus(status);
+        setTodoList();
     }
 
     return (

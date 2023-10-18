@@ -1,38 +1,38 @@
 import {Status} from "../../Model/StatusEnum.js";
 import "./TodoFilters.css";
-import {useState} from "react";
-export const TodoFilters = (props) => {
-    const [filterTodo, setFilterTodo] = useState(true);
-    const [filterInProgress, setFilterInProgress] = useState(true);
-    const [filterDone, setFilterDone] = useState(true);
-    const [filterFromDate, setFilterFromDate] = useState('1990-01-01');
-    const [filterToDate, setFilterToDate] = useState('2090-12-31');
+import {useContext} from "react";
+import {TodoListContext} from "../TodoHome/TodoHome.jsx";
+import {isNullOrUndef} from "chart.js/helpers";
 
-    const onChangeFilterTodo = () => {
-        // eslint-disable-next-line react/prop-types
-        props.onFilterChange({ filterTodo: !filterTodo , filterInProgress, filterDone, filterFromDate, filterToDate });
-        setFilterTodo(!filterTodo);
+export const TodoFilters = ({dispatch}) => {
+    let {filterList} = useContext(TodoListContext);
+
+    const onChangeFilter = (typeFilter, e = null) => {
+        let filterData;
+        const value = !isNullOrUndef(e) ? e.target.value : null;
+        switch (typeFilter) {
+            case "todo-filter":
+                filterData = {filterTodo: !filterList.filterTodo};
+                break;
+            case "in-progress-filter":
+                filterData = {filterInProgress: !filterList.filterInProgress};
+                break;
+            case "done-filter":
+                filterData = {filterDone: !filterList.filterDone};
+                break;
+            case "from-date-filter":
+                filterData = {filterFromDate: value};
+                break;
+            case "to-date-filter":
+                filterData = {filterToDate: value};
+                break;
+        }
+        let newVar = { type: 'filter-todo', filterList: {...filterList, ...filterData}};
+        console.log("New Var",newVar);
+        dispatch(newVar);
     }
-    const onChangeFilterInProgress = () => {
-        // eslint-disable-next-line react/prop-types
-        props.onFilterChange({ filterTodo, filterInProgress: !filterInProgress, filterDone, filterFromDate, filterToDate });
-        setFilterInProgress(!filterInProgress);
-    }
-    const onChangeFilterDone = () => {
-        // eslint-disable-next-line react/prop-types
-        props.onFilterChange({ filterTodo, filterInProgress, filterDone: !filterDone, filterFromDate, filterToDate });
-        setFilterDone(!filterDone);
-    }
-    const onChangeFilterFromDate = (e) => {
-        // eslint-disable-next-line react/prop-types
-        props.onFilterChange({ filterTodo, filterInProgress, filterDone, filterFromDate: e.target.value, filterToDate });
-        setFilterFromDate(e.target.value);
-    }
-    const onChangeFilterToDate = (e) => {
-        // eslint-disable-next-line react/prop-types
-        props.onFilterChange({ filterTodo, filterInProgress, filterDone, filterFromDate, filterToDate: e.target.value });
-        setFilterToDate(e.target.value);
-    }
+
+    console.log(filterList);
     return (
         <>
             <h2>Filtres</h2>
@@ -41,15 +41,15 @@ export const TodoFilters = (props) => {
                     <h3>Par état</h3>
                     <fieldset>
                         <div className="check-element">
-                            <input type="checkbox" id="todoStatus" name="todoStatus" onChange={onChangeFilterTodo} checked={filterTodo}/>
+                            <input type="checkbox" id="todoStatus" name="todoStatus" onChange={() => onChangeFilter("todo-filter")} checked={filterList.filterTodo}/>
                             <label htmlFor="todoStatus">{Status.todo}</label>
                         </div>
                         <div className="check-element">
-                            <input type="checkbox" id="inProgressStatus" name="inProgressStatus" onChange={onChangeFilterInProgress} checked={filterInProgress} />
+                            <input type="checkbox" id="inProgressStatus" name="inProgressStatus" onChange={() => onChangeFilter("in-progress-filter")} checked={filterList.filterInProgress} />
                             <label htmlFor="inProgressStatus">{Status.inProgress}</label>
                         </div>
                         <div className="check-element">
-                            <input type="checkbox" id="doneStatus" name="doneStatus" onChange={onChangeFilterDone} checked={filterDone} />
+                            <input type="checkbox" id="doneStatus" name="doneStatus" onChange={() => onChangeFilter("done-filter")} checked={filterList.filterDone} />
                             <label htmlFor="doneStatus">{Status.done}</label>
                         </div>
                     </fieldset>
@@ -59,9 +59,9 @@ export const TodoFilters = (props) => {
                     <div>
                         <p>
                             <span className="filter-date">du</span>
-                            <input className="filter-date" type="date" id="fromDate" name="fromDate" onChange={onChangeFilterFromDate} value={filterFromDate}/>
+                            <input className="filter-date" type="date" id="fromDate" name="fromDate" onChange={(event) => onChangeFilter("from-date-filter", event)} value={filterList.filterFromDate}/>
                             <span className="filter-date">au</span>
-                            <input className="filter-date" type="date" id="toDate" name="toDate" onChange={onChangeFilterToDate} value={filterToDate}/>
+                            <input className="filter-date" type="date" id="toDate" name="toDate" onChange={(event) => onChangeFilter("to-date-filter", event)} value={filterList.filterToDate}/>
                         </p>
                     </div>
                 </div>

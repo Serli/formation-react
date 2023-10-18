@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import {TodoApp} from "./Components/TodoApp/TodoApp.jsx";
+import {Router} from "./router.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <TodoApp />
+    <Router />
   </React.StrictMode>,
 )
