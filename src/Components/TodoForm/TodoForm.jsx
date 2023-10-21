@@ -1,29 +1,34 @@
 import "./TodoForm.css";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Status} from "../../Model/StatusEnum.js";
-import {todoDB} from "../../Model/TodoDB.js";
+import {TodoListContext} from "../../router.jsx";
+import {useNavigate} from "react-router-dom";
 
-const getMyTodoAnId = () => {
+const getMyTodoAnId = (todoList) => {
     let newId = 1;
-    if (todoDB.length > 1) {
-        todoDB.sort(function (a, b) {
-            return a.id - b.id;
+    if (todoList.length > 1) {
+        todoList.sort(function (a, b) {
+            return b.id - a.id;
         });
-        newId = todoDB[length-1];
-    } else if (todoDB.length === 1){
-        newId = todoDB[0].id+1;
+        newId = todoList[0].id+1;
+    } else if (todoList.length === 1){
+        newId = todoList[0].id+1;
     }
     return newId;
 }
-export const TodoForm = (props) => {
+// eslint-disable-next-line react/prop-types
+export const TodoForm = ({dispatch}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const state = useContext(TodoListContext);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const titleData = title.trim();
         const descriptionData = description.trim();
         const todo = {
+            id: getMyTodoAnId(state.todoList),
             title: titleData,
             description: descriptionData,
             status: Status.todo,
@@ -33,11 +38,10 @@ export const TodoForm = (props) => {
         handleTodoSubmit(todo);
         setTitle('');
         setDescription('');
+        navigate("/");
     };
     const handleTodoSubmit = (todo) => {
-        todo.id = getMyTodoAnId();
-        todoDB.push(todo);
-        //this.setState({todoList : todoDB})
+        dispatch({ type: 'add-todo', todo: todo});
     }
     const handleTitleChange = (e) => {
         setTitle(e.target.value);

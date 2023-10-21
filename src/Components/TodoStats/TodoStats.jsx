@@ -1,16 +1,20 @@
 import {Status} from "../../Model/StatusEnum.js";
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, {useContext} from "react";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 import {Pie} from "react-chartjs-2";
+import {TodoListContext} from "../../router.jsx";
+import "./TodoStats.css";
 
-export const TodoStats = (props) => {
-    const labels = [Status.todo, Status.inProgress, Status.done]
+export const TodoStats = () => {
+    const labels = [Status.todo, Status.inProgress, Status.done];
 
-    function giveMeStats(props) {
+    const state = useContext(TodoListContext);
+
+    function giveMeStats() {
         // eslint-disable-next-line react/prop-types
-        return props.todoList.reduce((res, todo) => {
+        return state.todoList.reduce((res, todo) => {
             switch (todo.status) {
                 case Status.todo:
                     res[0]++;
@@ -24,8 +28,6 @@ export const TodoStats = (props) => {
             }
             return res;
         },[0,0,0]);
-
-
     }
 
     const data = {
@@ -45,11 +47,10 @@ export const TodoStats = (props) => {
                 ],
                 borderWidth: 1,
                 // eslint-disable-next-line react/prop-types
-                data: props.todoList ? giveMeStats(props) : undefined,
+                data: state.todoList ? giveMeStats() : undefined,
             },
         ],
     };
-
     return (
         <div>
             <h2>Statistiques</h2>

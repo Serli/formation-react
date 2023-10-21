@@ -4,18 +4,17 @@ import {Status} from "./Model/StatusEnum.js";
 export const reducer = (state, action) => {
     switch (action.type) {
         case "add-todo" :
-            break;
-        case "update-todo-status" :
-            break;
+            return {
+                ...state,
+                todoList: [...state.todoList, action.todo]
+            };
         case "filter-todo" :
-            console.log(state);
             return handleFilterChange(action, state);
     }
     throw Error('Unknown action.');
 }
 
 const handleFilterChange = (previous, state) => {
-    console.log("previous",previous)
     const filter = previous.filterList;
     return {
         ...state,

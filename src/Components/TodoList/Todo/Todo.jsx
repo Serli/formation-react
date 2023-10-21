@@ -2,7 +2,7 @@
 import "./Todo.css";
 import {Status} from "../../../Model/StatusEnum.js";
 import {useContext, useState} from "react";
-import {TodoListContext} from "../../TodoHome/TodoHome.jsx";
+import {TodoListContext} from "../../../router.jsx";
 
 export const Todo = (props) => {
     const {setTodoList} = useContext(TodoListContext);

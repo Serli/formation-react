@@ -1,9 +1,10 @@
 import {Status} from "../../Model/StatusEnum.js";
 import "./TodoFilters.css";
 import {useContext} from "react";
-import {TodoListContext} from "../TodoHome/TodoHome.jsx";
 import {isNullOrUndef} from "chart.js/helpers";
+import {TodoListContext} from "../../router.jsx";
 
+// eslint-disable-next-line react/prop-types
 export const TodoFilters = ({dispatch}) => {
     let {filterList} = useContext(TodoListContext);
 
@@ -27,12 +28,8 @@ export const TodoFilters = ({dispatch}) => {
                 filterData = {filterToDate: value};
                 break;
         }
-        let newVar = { type: 'filter-todo', filterList: {...filterList, ...filterData}};
-        console.log("New Var",newVar);
-        dispatch(newVar);
+        dispatch({ type: 'filter-todo', filterList: {...filterList, ...filterData}});
     }
-
-    console.log(filterList);
     return (
         <>
             <h2>Filtres</h2>

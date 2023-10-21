@@ -1,6 +1,6 @@
 import {Todo} from "./Todo/Todo.jsx";
 import {useContext} from "react";
-import {TodoListContext} from "../TodoHome/TodoHome.jsx";
+import {TodoListContext} from "../../router.jsx";
 
 export const TodoList = () => {
     const {todoList} = useContext(TodoListContext);
@@ -18,7 +18,6 @@ export const TodoList = () => {
                     })
                 }
             </div>
-
         </div>
     );
 }
